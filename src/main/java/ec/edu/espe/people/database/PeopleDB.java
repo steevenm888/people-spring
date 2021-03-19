@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ec.edu.espe.people.model;
+package ec.edu.espe.people.database;
 
+import ec.edu.espe.people.model.People;
 import java.util.ArrayList;
 import lombok.Data;
 
