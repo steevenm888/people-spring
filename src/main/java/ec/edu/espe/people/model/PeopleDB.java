@@ -17,7 +17,7 @@ import lombok.Data;
 public class PeopleDB {
     private static PeopleDB peopleDBInstance = null;
     
-    private ArrayList<People> peopleDB;
+    private ArrayList<People> peopleDB = new ArrayList<>();
     
     public static PeopleDB getInstance() {
         if(peopleDBInstance == null) {
