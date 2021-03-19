@@ -17,6 +17,6 @@ import lombok.Data;
 public class People {
     private String identification;
     private String name;
-    private String lastname;
-    private Date birthdate;
+    private String phoneNumber;
+    private String address;
 }
