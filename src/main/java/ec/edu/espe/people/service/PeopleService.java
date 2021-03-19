@@ -7,6 +7,7 @@ package ec.edu.espe.people.service;
 
 import ec.edu.espe.people.model.People;
 import ec.edu.espe.people.model.PeopleDB;
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +24,10 @@ public class PeopleService {
         PeopleDB peopleDB = PeopleDB.getInstance();
         
         peopleDB.getPeopleDB().add(people);
-        
-        log.info(peopleDB.getPeopleDB().toString());
+    }
+    
+    public List<People> listAll() {
+        PeopleDB peopleDB = PeopleDB.getInstance();
+        return peopleDB.getPeopleDB();
     }
 }

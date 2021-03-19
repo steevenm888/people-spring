@@ -7,7 +7,9 @@ package ec.edu.espe.people.api;
 
 import ec.edu.espe.people.model.People;
 import ec.edu.espe.people.service.PeopleService;
+import java.util.List;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,5 +34,10 @@ public class PeopleController {
     public ResponseEntity savePeople(@RequestBody People people) {
         this.service.savePeople(people);
         return ResponseEntity.ok().build();
+    }
+    
+    @GetMapping("/listAll")
+    public ResponseEntity<List<People>> listAll() {
+        return ResponseEntity.ok(this.service.listAll());
     }
 }
