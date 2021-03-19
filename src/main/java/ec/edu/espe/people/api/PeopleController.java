@@ -36,36 +36,39 @@ public class PeopleController {
         this.service = service;
     }
     
-    @PostMapping("/add")
-    public ResponseEntity savePeople(@RequestBody People people) {
+    @PostMapping()
+    public ResponseEntity savePeople(@RequestBody People person) {
+        ResponseEntity response;
         try {
-            log.info("Person added succesfully");
-            this.service.savePeople(people);
-            return ResponseEntity.ok().build();
+            this.service.savePeople(person);
+            response = ResponseEntity.ok().build();
         } catch (InsertException e) {
-            return ResponseEntity.badRequest().build();
+            log.error(e.getMessage());
+            response = ResponseEntity.badRequest().build();
         } catch (Exception e) {
             log.error(e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            response = ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
+        return response;
     }
     
-    @GetMapping("/listAll")
+    @GetMapping()
     public ResponseEntity<List<People>> listAll() {
-        log.info("Listed all people in the db");
         return ResponseEntity.ok(this.service.listAll());
     }
     
-    @GetMapping("/findByIdentification/{identification}")
+    @GetMapping("/{identification}")
     public ResponseEntity<People> findByIdentification(@PathVariable String identification) {
+        ResponseEntity response;
         try {
-            log.info("Person with identification {} found");
-            return ResponseEntity.ok(this.service.findByIdentification(identification));
+            response = ResponseEntity.ok(this.service.findByIdentification(identification));
         } catch (RegistryNotFoundException e) {
-            return ResponseEntity.notFound().build();
+            log.error(e.getMessage());
+            response = ResponseEntity.notFound().build();
         } catch (Exception e) {
             log.error(e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            response = ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
+        return response;
     }
 }
