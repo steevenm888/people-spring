@@ -5,6 +5,9 @@ import ec.edu.espe.people.exception.RegistryNotFoundException;
 import ec.edu.espe.people.model.People;
 import ec.edu.espe.people.service.PeopleService;
 import java.util.Dictionary;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +30,11 @@ public class PeopleController {
     }
     
     @PostMapping()
+    @ApiOperation(value = "Create a new person")
+    @ApiResponses(value = {
+        @ApiResponse(code = 200, message = "Person created succesfully"),
+        @ApiResponse(code = 400, message = "A person with the sent indentification already exists"),
+        @ApiResponse(code = 500, message = "Internal Server Error")})
     public ResponseEntity savePeople(@RequestBody People person) {
         ResponseEntity response;
         try {
@@ -43,11 +51,21 @@ public class PeopleController {
     }
     
     @GetMapping()
+    @ApiOperation(value = "List registered people")
+    @ApiResponses(value = {
+        @ApiResponse(code = 200, message = "All registries listed"),
+        @ApiResponse(code = 404, message = "No registries found"),
+        @ApiResponse(code = 500, message = "Internal Server Error")})
     public ResponseEntity<Dictionary<String, People>> listAll() {
         return ResponseEntity.ok(this.service.listAll());
     }
     
     @GetMapping("/{identification}")
+    @ApiOperation(value = "Find a person by its identification")
+    @ApiResponses(value = {
+        @ApiResponse(code = 200, message = "Person with sent identification found"),
+        @ApiResponse(code = 404, message = "No person with sent identification found"),
+        @ApiResponse(code = 500, message = "Internal Server Error")})
     public ResponseEntity<People> findByIdentification(@PathVariable String identification) {
         ResponseEntity response;
         try {
