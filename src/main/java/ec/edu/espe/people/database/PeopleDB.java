@@ -6,18 +6,19 @@ import java.util.Hashtable;
 import lombok.Data;
 
 @Data
-public class PeopleDB {
-    private static PeopleDB peopleDBInstance = null;
-    
-    private Dictionary<String, People> peopleDB;
-    
-    public PeopleDB() {
-        this.peopleDB = new Hashtable<String, People>();
+public class PeopleDb {
+
+    private static PeopleDb peopleDBInstance = null;
+
+    private Dictionary<String, People> peopleDb;
+
+    public PeopleDb() {
+        this.peopleDb = new Hashtable<String, People>();
     }
-    
-    public static PeopleDB getInstance() {
-        if(peopleDBInstance == null) {
-            peopleDBInstance = new PeopleDB();
+
+    public static PeopleDb getInstance() {
+        if (peopleDBInstance == null) {
+            peopleDBInstance = new PeopleDb();
         }
         return peopleDBInstance;
     }
