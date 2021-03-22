@@ -1,18 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ec.edu.espe.people.api;
 
 import ec.edu.espe.people.exception.InsertException;
 import ec.edu.espe.people.exception.RegistryNotFoundException;
 import ec.edu.espe.people.model.People;
 import ec.edu.espe.people.service.PeopleService;
+import java.util.Dictionary;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,11 +17,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-/**
- *
- * @author esteban
- */
 
 @RestController
 @RequestMapping("/api/people")
@@ -66,7 +56,7 @@ public class PeopleController {
         @ApiResponse(code = 200, message = "All registries listed"),
         @ApiResponse(code = 404, message = "No registries found"),
         @ApiResponse(code = 500, message = "Internal Server Error")})
-    public ResponseEntity<List<People>> listAll() {
+    public ResponseEntity<Dictionary<String, People>> listAll() {
         return ResponseEntity.ok(this.service.listAll());
     }
     
