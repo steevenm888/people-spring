@@ -3,22 +3,22 @@ package ec.edu.espe.people.database;
 import ec.edu.espe.people.model.People;
 import java.util.Dictionary;
 import java.util.Hashtable;
-import lombok.Data;
+import lombok.Getter;
 
-@Data
-public class PeopleDb {
+@Getter
+public class PeopleDatabase {
 
-    private static PeopleDb peopleDBInstance = null;
-
+    private static PeopleDatabase peopleDBInstance;
     private Dictionary<String, People> peopleDb;
 
-    public PeopleDb() {
+    public PeopleDatabase() {
+        this.peopleDBInstance = null;
         this.peopleDb = new Hashtable<String, People>();
     }
 
-    public static PeopleDb getInstance() {
+    public static PeopleDatabase getInstance() {
         if (peopleDBInstance == null) {
-            peopleDBInstance = new PeopleDb();
+            peopleDBInstance = new PeopleDatabase();
         }
         return peopleDBInstance;
     }
